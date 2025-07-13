@@ -1,0 +1,336 @@
+/* ==========================================================================
+   KKN Documentation - Complete Stylesheet
+   ========================================================================== */
+
+:root {
+    --primary-color: #2d5016;
+    /* Hijau tua (daun) */
+    --secondary-color: #8b4513;
+    /* Coklat tanah */
+    --accent-color: #ffd700;
+    /* Emas (padi) */
+    --bg-color: #f8f9fa;
+    /* Putih lembut */
+    --text-primary: #2c3e50;
+    /* Abu gelap */
+    --text-secondary: #7f8c8d;
+    /* Abu terang */
+    --white: #ffffff;
+    --light-green: #90c695;
+    /* Hijau muda */
+    --warm-beige: #f5f5dc;
+    /* Krem hangat */
+}
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.bg-warm-beige {
+    background-color: var(--warm-beige) !important;
+}
+
+.text-accent {
+    color: var(--accent-color) !important;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* KKN Stats */
+.kkn-stat {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.kkn-stat h3 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.kkn-stat p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--primary-color);
+    top: 0;
+    bottom: 0;
+    left: 30px;
+    margin-left: -2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 4rem;
+    padding-left: 80px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.timeline-number {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.timeline-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--accent-color);
+}
+
+.timeline-title {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.timeline-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.timeline-activities {
+    list-style: none;
+    padding-left: 0;
+}
+
+.timeline-activities li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.timeline-activities li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.timeline-gallery {
+    margin-top: 1rem;
+}
+
+.timeline-gallery img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+/* Team Cards */
+.team-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.team-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--light-green);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+}
+
+.team-card h5 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.team-card p {
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.team-photo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+/* Gallery Grid */
+#kknGallery {
+    min-height: 400px;
+}
+
+.gallery-item {
+    margin-bottom: 1rem;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.gallery-caption {
+    padding: 0.75rem;
+    background: white;
+    border-radius: 0 0 0.5rem 0.5rem;
+    margin-top: -0.25rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+/* Program Categories */
+.program-category h5 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Contact Info in Footer */
+.contact-info p {
+    margin-bottom: 0.5rem;
+}
+
+.contact-info i {
+    color: var(--accent-color);
+    width: 20px;
+}
+
+/* Navigation Active State */
+.navbar-nav .nav-link.active {
+    color: var(--accent-color) !important;
+    font-weight: 500;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+}
+
+.card-header {
+    background-color: var(--light-green);
+    border-bottom: none;
+    border-radius: 1rem 1rem 0 0 !important;
+}
+
+/* Responsive Timeline */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 15px;
+    }
+
+    .timeline-item {
+        padding-left: 50px;
+    }
+
+    .timeline-marker {
+        width: 40px;
+        height: 40px;
+    }
+
+    .timeline-number {
+        font-size: 1rem;
+    }
+
+    .timeline-content {
+        padding: 1.5rem;
+    }
+
+    .timeline-title {
+        font-size: 1.25rem;
+    }
+
+    .timeline-gallery img {
+        height: 100px;
+    }
+}
+
+/* Text Utilities */
+.text-primary-custom {
+    color: var(--primary-color) !important;
+}
+
+.text-secondary-custom {
+    color: var(--text-secondary) !important;
+}
+
+.bg-light-green {
+    background-color: var(--light-green) !important;
+}
+
+/* Section Spacing */
+section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* Image Responsive */
+img {
+    max-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acara & Kegiatan - Dusun Bangsari</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2d5016;
+            /* Hijau tua (daun) */
+            --secondary-color: #8b4513;
+            /* Coklat tanah */
+            --accent-color: #ffd700;
+            /* Emas (padi) */
+            --bg-color: #f8f9fa;
+            /* Putih lembut */
+            --text-primary: #2c3e50;
+            /* Abu gelap */
+            --text-secondary: #7f8c8d;
+            /* Abu terang */
+            --white: #ffffff;
+            --light-green: #90c695;
+            /* Hijau muda */
+            --warm-beige: #f5f5dc;
+            /* Krem hangat */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: var(--primary-color) !important;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white) !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--white) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color) !important;
+        }
+
+        .dropdown-menu {
+            background-color: var(--white);
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-item {
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light-green);
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .text-accent {
+            color: var(--accent-color);
+        }
+
+        /* Section Styling */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* Activity Cards */
+        .activity-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .activity-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--light-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .activity-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .activity-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Schedule Table */
+        .schedule-table {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .schedule-table table {
+            margin: 0;
+        }
+
+        .schedule-table th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+            padding: 1rem;
+            border: none;
+        }
+
+        .schedule-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .schedule-table tbody tr:hover {
+            background-color: var(--warm-beige);
+        }
+
+        /* Badge Styling */
+        .time-badge {
+            background-color: var(--accent-color);
+            color: var(--text-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .participant-badge {
+            background-color: var(--light-green);
+            color: var(--white);
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, var(--warm-beige), var(--white));
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .info-box h5 {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Back to Top Button */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        #backToTop:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .activity-card {
+                padding: 1.5rem;
+            }
+
+            .schedule-table {
+                font-size: 0.9rem;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html">
+                <i class="fas fa-mountain me-2"></i>Dusun Bangsari
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Informasi Dusun
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profil-dusun.html">Profil Dusun</a></li>
+                            <li><a class="dropdown-item" href="komoditas.html">Komoditas Unggulan</a></li>
+                            <li><a class="dropdown-item" href="kontak.html">Kontak Penting</a></li>
+                            <li><a class="dropdown-item" href="peta.html">Peta Dusun</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="acara.html">Acara & Kegiatan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dokumentasi-kkn.html">Dokumentasi KKN</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">
+                Jadwal Acara & Kegiatan<br>
+                <span class="text-accent">Komunitas Dusun Bangsari</span>
+            </h1>
+            <p class="hero-subtitle">
+                Informasi lengkap tentang kegiatan rutin dan acara khusus<br>
+                yang melibatkan seluruh masyarakat Dusun Bangsari
+            </p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="info-box">
+                        <h5><i class="fas fa-info-circle me-2"></i>Tentang Kegiatan Komunitas</h5>
+                        <p class="mb-0">
+                            Dusun Bangsari memiliki berbagai kegiatan rutin yang melibatkan seluruh lapisan masyarakat.
+                            Kegiatan-kegiatan ini bertujuan untuk mempererat silaturahmi, meningkatkan keimanan,
+                            serta menjaga kesehatan dan kesejahteraan bersama. Setiap kegiatan diorganisir dengan baik
+                            dan melibatkan partisipasi aktif dari warga.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Religious Activities Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Kegiatan Keagamaan Rutin</h2>
+            <p class="section-subtitle">Kegiatan spiritual yang dilaksanakan secara rutin per RT</p>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h4 class="activity-title">Yasinan Malam</h4>
+                        <p class="activity-description">
+                            Pembacaan surat Yasin bersama yang dilakukan secara rutin setiap malam.
+                            Kegiatan ini melibatkan bapak-bapak dan ibu-ibu di setiap RT.
+                        </p>
+                        <div class="mb-2">
+                            <span class="participant-badge">Bapak-bapak</span>
+                            <span class="participant-badge">Ibu-ibu</span>
+                        </div>
+                        <span class="time-badge">Setiap Malam</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-hands-praying"></i>
+                        </div>
+                        <h4 class="activity-title">Tahlilan</h4>
+                        <p class="activity-description">
+                            Kegiatan membaca tahlil dan doa bersama untuk mendoakan arwah yang telah meninggal
+                            serta memohon keberkahan untuk keluarga yang ditinggalkan.
+                        </p>
+                        <div class="mb-2">
+                            <span class="participant-badge">Bapak-bapak</span>
+                            <span class="participant-badge">Ibu-ibu</span>
+                        </div>
+                        <span class="time-badge">Malam Hari</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h4 class="activity-title">Fidaan (Pembacaan Al-Qur'an)</h4>
+                        <p class="activity-description">
+                            Kegiatan rutin pembacaan Al-Qur'an secara bergiliran yang dilakukan
+                            di setiap RT untuk meningkatkan kualitas bacaan dan pemahaman.
+                        </p>
+                        <div class="mb-2">
+                            <span class="participant-badge">Bapak-bapak</span>
+                            <span class="participant-badge">Ibu-ibu</span>
+                        </div>
+                        <span class="time-badge">Malam Hari</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Activities Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Kegiatan Komunitas</h2>
+            <p class="section-subtitle">Aktivitas yang melibatkan seluruh masyarakat dusun</p>
+
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h4 class="activity-title">Senam Ibu-ibu</h4>
+                        <p class="activity-description">
+                            Kegiatan olahraga rutin yang dikhususkan untuk ibu-ibu di dusun.
+                            Senam ini bertujuan untuk menjaga kesehatan dan mempererat silaturahmi
+                            antar warga perempuan.
+                        </p>
+                        <div class="mb-2">
+                            <span class="participant-badge">Ibu-ibu</span>
+                        </div>
+                        <span class="time-badge">Setiap Sore</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-4">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h4 class="activity-title">Pengajian Anak-anak</h4>
+                        <p class="activity-description">
+                            Program pendidikan agama untuk anak-anak yang dilaksanakan secara rutin
+                            setiap sore untuk membentuk karakter dan meningkatkan pengetahuan agama.
+                        </p>
+                        <div class="mb-2">
+                            <span class="participant-badge">Anak-anak</span>
+                        </div>
+                        <span class="time-badge">Setiap Sore</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Schedule Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Jadwal Kegiatan Harian</h2>
+            <p class="section-subtitle">Waktu pelaksanaan kegiatan rutin setiap hari</p>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="schedule-table">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Kegiatan</th>
+                                    <th>Waktu</th>
+                                    <th>Peserta</th>
+                                    <th>Lokasi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Pengajian Anak-anak</strong></td>
+                                    <td>
+                                        <span class="time-badge">Setelah Magrib</span><br>
+                                        <small class="text-muted">17:30 - 18:30</small>
+                                    </td>
+                                    <td>
+                                        <span class="participant-badge">Anak-anak</span>
+                                    </td>
+                                    <td>Mushola/Masjid Dusun</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Senam Ibu-ibu</strong></td>
+                                    <td>
+                                        <span class="time-badge">Sore Hari</span><br>
+                                        <small class="text-muted">16:00 - 17:00</small>
+                                    </td>
+                                    <td>
+                                        <span class="participant-badge">Ibu-ibu</span>
+                                    </td>
+                                    <td>Balai Dusun</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pengajian Anak-anak (Sesi 2)</strong></td>
+                                    <td>
+                                        <span class="time-badge">Setelah Isya</span><br>
+                                        <small class="text-muted">19:30 - 20:30</small>
+                                    </td>
+                                    <td>
+                                        <span class="participant-badge">Anak-anak</span>
+                                    </td>
+                                    <td>Mushola/Masjid Dusun</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Yasinan RT</strong></td>
+                                    <td>
+                                        <span class="time-badge">Malam Hari</span><br>
+                                        <small class="text-muted">20:00 - 21:00</small>
+                                    </td>
+                                    <td>
+                                        <span class="participant-badge">Bapak-bapak</span>
+                                        <span class="participant-badge">Ibu-ibu</span>
+                                    </td>
+                                    <td>Per RT (Bergiliran)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tahlilan</strong></td>
+                                    <td>
+                                        <span class="time-badge">Sesuai Kebutuhan</span><br>
+                                        <small class="text-muted">Malam Hari</small>
+                                    </td>
+                                    <td>
+                                        <span class="participant-badge">Bapak-bapak</span>
+                                        <span class="participant-badge">Ibu-ibu</span>
+                                    </td>
+                                    <td>Rumah Keluarga</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fidaan</strong></td>
+                                    <td>
+                                        <span class="time-badge">Malam Hari</span><br>
+                                        <small class="text-muted">20:30 - 21:30</small>
+                                    </td>
+                                    <td>
+                                        <span class="participant-badge">Bapak-bapak</span>
+                                        <span class="participant-badge">Ibu-ibu</span>
+                                    </td>
+                                    <td>Mushola/Masjid Dusun</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Events Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Kegiatan Khusus</h2>
+            <p class="section-subtitle">Acara-acara yang dilaksanakan pada waktu tertentu</p>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-mosque"></i>
+                        </div>
+                        <h4 class="activity-title">Pengajian Hari Raya Islam</h4>
+                        <p class="activity-description">
+                            Kegiatan pengajian dan kajian khusus yang dilaksanakan pada hari-hari besar Islam
+                            seperti Idul Fitri, Idul Adha, Maulid Nabi, Isra Mi'raj, dan hari-hari besar
+                            lainnya. Kegiatan ini melibatkan seluruh warga dusun dengan menghadirkan
+                            penceramah atau ulama dari luar dusun.
+                        </p>
+                        <div class="mb-3">
+                            <span class="participant-badge">Seluruh Warga</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="fw-bold text-primary">Contoh Kegiatan:</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-star text-warning me-2"></i>Pengajian Idul Fitri</li>
+                                    <li><i class="fas fa-star text-warning me-2"></i>Pengajian Idul Adha</li>
+                                    <li><i class="fas fa-star text-warning me-2"></i>Maulid Nabi Muhammad SAW</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="fw-bold text-primary">Lokasi:</h6>
+                                <p class="mb-0">
+                                    <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                                    Masjid Dusun atau Balai Dusun
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-brand">
+                        <i class="fas fa-mountain me-2"></i>Dusun Bangsari
+                    </div>
+                    <p class="text-light mb-4">
+                        Website resmi Dusun Bangsari yang menyajikan informasi lengkap
+                        tentang profil, kegiatan, dan potensi dusun.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="fw-bold mb-3">Menu</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="../index.html" class="text-light text-decoration-none">Beranda</a></li>
+                        <li><a href="profil-dusun.html" class="text-light text-decoration-none">Profil</a></li>
+                        <li><a href="komoditas.html" class="text-light text-decoration-none">Komoditas</a></li>
+                        <li><a href="kontak.html" class="text-light text-decoration-none">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="fw-bold mb-3">Kontak</h6>
+                    <div class="contact-info">
+                        <p class="text-light mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Dusun Bangsari, Yogyakarta
+                        </p>
+                        <p class="text-light mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +62 812-3456-7890
+                        </p>
+                        <p class="text-light mb-0">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@dusunbangsari.com
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+                    <h6 class="fw-bold mb-3">Program KKN</h6>
+                    <p class="text-light mb-3">
+                        Website ini dikembangkan sebagai bagian dari program KKN
+                        untuk memperkenalkan potensi Dusun Bangsari.
+                    </p>
+                    <a href="dokumentasi-kkn.html" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-camera me-1"></i>Lihat Dokumentasi
+                    </a>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-light mb-0">
+                        &copy; 2025 Dusun Bangsari. Dikembangkan oleh Tim KKN.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small class="text-light">
+                        Dibuat dengan ❤️ untuk kemajuan dusun
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Back to top functionality
+        window.addEventListener('scroll', function () {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        window.addEventListener('scroll', function () {
+            const cards = document.querySelectorAll('.activity-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const cardVisible = 150;
+
+                if (cardTop < window.innerHeight - cardVisible) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize cards with initial state
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.activity-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+        });
+    </script>
+</body>
+
+</html>

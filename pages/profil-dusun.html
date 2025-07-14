@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Dusun - Dusun Bangsari</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2d5016;
+            --secondary-color: #8b4513;
+            --accent-color: #ffd700;
+            --bg-color: #f8f9fa;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --white: #ffffff;
+            --light-green: #90c695;
+            --warm-beige: #f5f5dc;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--primary-color) !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--light-green));
+            padding: 100px 0 80px;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .profile-card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .profile-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .profile-card p {
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--light-green);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 15px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .organization-card {
+            background: var(--warm-beige);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .organization-card h5 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .rt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .rt-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid var(--light-green);
+        }
+
+        .rt-card h6 {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 40px 0 20px;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        #backToTop:hover {
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html">
+                <i class="fas fa-mountain me-2"></i>Dusun Bangsari
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            Informasi Dusun
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profil-dusun.html">Profil Dusun</a></li>
+                            <li><a class="dropdown-item" href="komoditas.html">Komoditas Unggulan</a></li>
+                            <li><a class="dropdown-item" href="kontak.html">Kontak Penting</a></li>
+                            <li><a class="dropdown-item" href="peta.html">Peta Dusun</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="acara.html">Acara & Kegiatan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dokumentasi-kkn.html">Dokumentasi KKN</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Profil Dusun Bangsari</h1>
+            <p class="hero-subtitle">Mengenal lebih dekat dengan sejarah, struktur, dan kehidupan masyarakat</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <!-- Tentang Dusun -->
+        <div class="profile-card">
+            <h3><i class="fas fa-home me-2"></i>Tentang Dusun Bangsari</h3>
+            <p>
+                Dusun Bangsari adalah sebuah dusun yang terletak di wilayah Yogyakarta yang kaya akan tradisi dan budaya
+                lokal.
+                Dusun ini dikenal dengan keramahan masyarakatnya dan potensi pertanian yang melimpah. Dengan latar
+                belakang
+                sebagai daerah agraris, Dusun Bangsari telah berkembang menjadi komunitas yang harmonis dengan tetap
+                mempertahankan nilai-nilai budaya dan gotong royong yang kuat.
+            </p>
+            <p>
+                Kehidupan sehari-hari masyarakat Dusun Bangsari sangat erat kaitannya dengan aktivitas pertanian,
+                terutama bercocok tanam padi dan jagung. Selain itu, dusun ini juga memiliki berbagai kegiatan
+                sosial dan budaya yang rutin dilaksanakan untuk mempererat tali silaturahmi antarwarga.
+            </p>
+        </div>
+
+        <!-- Statistik Dusun -->
+        <h2 class="section-title">Data Statistik Dusun</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Kepala Keluarga</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="stat-number">4</div>
+                <div class="stat-label">Rukun Tetangga (RT)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="stat-number">1</div>
+                <div class="stat-label">Rukun Warga (RW)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Hektar Sawah</div>
+            </div>
+        </div>
+
+        <!-- Struktur Wilayah -->
+        <div class="profile-card">
+            <h3><i class="fas fa-map me-2"></i>Struktur Wilayah</h3>
+            <p>
+                Dusun Bangsari terdiri dari 4 Rukun Tetangga (RT) yang tergabung dalam 1 Rukun Warga (RW).
+                Setiap RT memiliki ketua yang bertanggung jawab atas koordinasi kegiatan dan administrasi di wilayahnya
+                masing-masing.
+            </p>
+
+            <div class="rt-grid">
+                <div class="rt-card">
+                    <h6>RT 001</h6>
+                    <p class="mb-0 text-muted">Wilayah Utara</p>
+                </div>
+                <div class="rt-card">
+                    <h6>RT 002</h6>
+                    <p class="mb-0 text-muted">Wilayah Timur</p>
+                </div>
+                <div class="rt-card">
+                    <h6>RT 003</h6>
+                    <p class="mb-0 text-muted">Wilayah Selatan</p>
+                </div>
+                <div class="rt-card">
+                    <h6>RT 004</h6>
+                    <p class="mb-0 text-muted">Wilayah Barat</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Organisasi Kepemudaan -->
+        <div class="profile-card">
+            <h3><i class="fas fa-users me-2"></i>Organisasi Kepemudaan</h3>
+            <p>
+                Dusun Bangsari memiliki organisasi kepemudaan yang aktif dalam berbagai kegiatan sosial dan budaya.
+                Organisasi ini berperan penting dalam menggerakkan berbagai program pembangunan dan kegiatan
+                kemasyarakatan.
+            </p>
+
+            <div class="organization-card">
+                <h5><i class="fas fa-star me-2"></i>Karang Taruna Bangsari</h5>
+                <p class="mb-0">Organisasi kepemudaan yang aktif dalam kegiatan sosial, olahraga, dan budaya untuk
+                    mengembangkan potensi generasi muda dusun.</p>
+            </div>
+
+            <div class="organization-card">
+                <h5><i class="fas fa-mosque me-2"></i>Remaja Masjid</h5>
+                <p class="mb-0">Organisasi keagamaan yang mengelola kegiatan spiritual dan dakwah untuk pemuda-pemudi
+                    dusun.</p>
+            </div>
+        </div>
+
+        <!-- Visi Misi -->
+        <div class="profile-card">
+            <h3><i class="fas fa-eye me-2"></i>Visi & Misi</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="text-primary">Visi</h5>
+                    <p>Mewujudkan Dusun Bangsari yang sejahtera, mandiri, dan berbudaya dengan tetap mempertahankan
+                        nilai-nilai gotong royong dan kearifan lokal.</p>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-primary">Misi</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mengembangkan potensi pertanian
+                            berkelanjutan</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Memperkuat sistem gotong royong
+                            masyarakat</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Meningkatkan kualitas sumber daya
+                            manusia</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Melestarikan budaya dan tradisi
+                            lokal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-brand">
+                        <i class="fas fa-mountain me-2"></i>Dusun Bangsari
+                    </div>
+                    <p class="text-light mb-4">
+                        Website resmi Dusun Bangsari yang menyajikan informasi lengkap
+                        tentang profil, kegiatan, dan potensi dusun.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="fw-bold mb-3">Menu</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="../index.html" class="text-light text-decoration-none">Beranda</a></li>
+                        <li><a href="profil-dusun.html" class="text-light text-decoration-none">Profil</a></li>
+                        <li><a href="komoditas.html" class="text-light text-decoration-none">Komoditas</a></li>
+                        <li><a href="kontak.html" class="text-light text-decoration-none">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="fw-bold mb-3">Kontak</h6>
+                    <div class="contact-info">
+                        <p class="text-light mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Dusun Bangsari, Yogyakarta
+                        </p>
+                        <p class="text-light mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +62 812-3456-7890
+                        </p>
+                        <p class="text-light mb-0">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@dusunbangsari.com
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+                    <h6 class="fw-bold mb-3">Program KKN</h6>
+                    <p class="text-light mb-3">
+                        Website ini dikembangkan sebagai bagian dari program KKN
+                        untuk memperkenalkan potensi Dusun Bangsari.
+                    </p>
+                    <a href="dokumentasi-kkn.html" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-camera me-1"></i>Lihat Dokumentasi
+                    </a>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-light mb-0">
+                        &copy; 2025 Dusun Bangsari. Dikembangkan oleh Tim KKN.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small class="text-light">
+                        Dibuat dengan ❤️ untuk kemajuan dusun
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Back to top functionality
+        window.addEventListener('scroll', function () {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

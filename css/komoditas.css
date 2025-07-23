@@ -1,0 +1,81 @@
+/*
+ * Custom Styles for Komoditas Page
+ */
+
+/* Hero/Banner Section for Pages */
+.page-hero {
+    /* Menggunakan gradient yang mirip dengan hero di halaman utama untuk konsistensi */
+    background: linear-gradient(135deg, rgba(10, 64, 12, 0.85), rgba(129, 144, 103, 0.85)),
+        url('https://images.unsplash.com/photo-1492496913980-501348b61469?w=1920&h=500&fit=crop') center/cover;
+    padding: 6rem 0;
+    text-align: center;
+}
+
+.page-hero .page-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.page-hero .page-subtitle {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0.5rem auto 0;
+}
+
+/* Commodity Section Styling */
+.commodity-item {
+    padding: 2rem 0;
+}
+
+.commodity-item .commodity-title {
+    font-weight: 700;
+    color: var(--primary-color);
+    /* Menggunakan variabel warna dari style.css */
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+/* Garis bawah judul menggunakan accent color */
+.commodity-item .commodity-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    /* Menggunakan variabel warna dari style.css */
+    border-radius: 2px;
+}
+
+.commodity-item img {
+    /* Menambahkan efek hover pada gambar */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.commodity-item:hover img {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Penyesuaian untuk tampilan mobile */
+@media (max-width: 767.98px) {
+    .page-hero {
+        padding: 4rem 0;
+    }
+
+    .page-hero .page-title {
+        font-size: 2rem;
+    }
+
+    /* Memastikan gambar dan teks di mobile memiliki jarak */
+    .commodity-item .col-md-6 {
+        margin-bottom: 1.5rem;
+    }
+
+    .commodity-item .commodity-title {
+        font-size: 1.8rem;
+    }
+}

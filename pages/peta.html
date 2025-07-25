@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Dusun - Dusun Bangsari</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-color: #0A400C;
+            --secondary-color: #819067;
+            --accent-color: #B1AB86;
+            --bg-color: #FEFAE0;
+            --text-primary: #0A400C;
+            --text-secondary: #819067;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-color);
+        }
+
+        .bg-primary {
+            background-color: var(--primary-color) !important;
+        }
+
+        .text-accent {
+            color: var(--accent-color) !important;
+        }
+
+        /* Navigation */
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(10, 64, 12, 0.9), rgba(129, 144, 103, 0.8)),
+                url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=400&fit=crop') center/cover;
+            color: white;
+            padding: 4rem 0 2rem;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Map Cards */
+        .map-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 3rem;
+        }
+
+        .map-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .map-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .map-image:hover {
+            transform: scale(1.02);
+        }
+
+        .map-content {
+            padding: 2rem;
+        }
+
+        .map-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .map-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Legend Items */
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 10px;
+            border: 1px solid #dee2e6;
+        }
+
+        /* Action Buttons */
+        .map-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-map {
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        /* Modal Styles */
+        .modal-dialog-centered {
+            max-width: 90vw;
+        }
+
+        .modal-body img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        /* Info Cards */
+        .info-highlight {
+            background: linear-gradient(135deg, var(--accent-color), #c4be96);
+            color: var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .info-highlight h5 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Back to Top */
+        #backToTop {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        #backToTop:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .map-content {
+                padding: 1.5rem;
+            }
+
+            .map-image {
+                height: 300px;
+            }
+
+            .map-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html">
+                <i class="fas fa-mountain me-2"></i>Dusun Bangsari
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Informasi Dusun
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profil-dusun.html">Profil Dusun</a></li>
+                            <li><a class="dropdown-item" href="komoditas.html">Komoditas Unggulan</a></li>
+                            <li><a class="dropdown-item" href="kontak.html">Kontak Penting</a></li>
+                            <li><a class="dropdown-item" href="peta.html">Peta Dusun</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="acara.html">Acara & Kegiatan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dokumentasi-kkn.html">Dokumentasi KKN</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-map me-3"></i>Peta Dusun Bangsari
+            </h1>
+            <p class="page-subtitle">
+                Pemetaan wilayah dan analisis kerawanan bencana Dusun Bangsari
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Introduction -->
+            <div class="info-highlight">
+                <h5><i class="fas fa-info-circle me-2"></i>Informasi Peta</h5>
+                <p class="mb-0">
+                    Peta-peta berikut dibuat oleh tim KKN UPN "Veteran" Yogyakarta tahun 2025
+                    untuk membantu analisis wilayah dan mitigasi bencana di Dusun Bangsari
+                </p>
+            </div>
+
+            <!-- Map 1: Peta Rawan Bencana Longsor -->
+            <div class="map-card">
+                <img src="../images/PETA_LONGSOR.jpg"
+                    alt="Peta Rawan Bencana Longsor" class="map-image" data-bs-toggle="modal"
+                    data-bs-target="#mapModal1">
+
+                <div class="map-content">
+                    <h3 class="map-title">
+                        <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                        Peta Rawan Bencana Longsor
+                    </h3>
+
+                    <p class="map-description">
+                        Peta ini menunjukkan tingkat kerawanan tanah longsor di wilayah Desa Simbang,
+                        khususnya Dusun Bangsari. Peta dibuat berdasarkan analisis kemiringan lereng,
+                        jenis tanah, curah hujan, dan kondisi geologi setempat.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">Keterangan Warna:</h6>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #2d5a2d;"></div>
+                                <span><strong>Hijau Tua:</strong> Sangat aman dari longsor</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #7cb342;"></div>
+                                <span><strong>Hijau Muda:</strong> Aman, potensi kecil</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #ffc107;"></div>
+                                <span><strong>Kuning:</strong> Potensi sedang</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #dc3545;"></div>
+                                <span><strong>Merah:</strong> Potensi sangat tinggi</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">Karakteristik Wilayah:</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check-circle text-success me-2"></i>Area persawahan: Risiko rendah
+                                </li>
+                                <li><i class="fas fa-exclamation-circle text-warning me-2"></i>Lereng curam: Perlu
+                                    perhatian</li>
+                                <li><i class="fas fa-home text-primary me-2"></i>Area permukiman: Relatif aman</li>
+                                <li><i class="fas fa-mountain text-danger me-2"></i>Puncak bukit: Risiko tinggi</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="map-actions mt-3">
+                        <button class="btn btn-primary btn-map" data-bs-toggle="modal" data-bs-target="#mapModal1">
+                            <i class="fas fa-search-plus me-1"></i>Lihat Detail
+                        </button>
+                        <button class="btn btn-outline-success btn-map" onclick="downloadMap('longsor')">
+                            <i class="fas fa-download me-1"></i>Unduh Peta
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map 2: Peta Administrasi Dusun -->
+            <div class="map-card">
+                <img src="../images/peta_admin.jpg"
+                    alt="Peta Administrasi Dusun" class="map-image" data-bs-toggle="modal" data-bs-target="#mapModal2">
+
+                <div class="map-content">
+                    <h3 class="map-title">
+                        <i class="fas fa-map text-primary me-2"></i>
+                        Peta Administrasi Dusun Bangsari
+                    </h3>
+
+                    <p class="map-description">
+                        Peta administrasi ini menampilkan pembagian wilayah RT (Rukun Tetangga)
+                        di Dusun Bangsari serta lokasi fasilitas penting seperti masjid,
+                        madrasah, dan rumah para perangkat dusun.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">Pembagian RT:</h6>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #007bff;"></div>
+                                <span><strong>RT 26:</strong> Wilayah Utara</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #28a745;"></div>
+                                <span><strong>RT 27:</strong> Wilayah Timur</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #ffc107;"></div>
+                                <span><strong>RT 28:</strong> Wilayah Selatan</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #dc3545;"></div>
+                                <span><strong>RT 29:</strong> Wilayah Barat</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3">Fasilitas Penting:</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-mosque text-success me-2"></i>Masjid Dusun</li>
+                                <li><i class="fas fa-school text-info me-2"></i>Madrasah</li>
+                                <li><i class="fas fa-home text-primary me-2"></i>Rumah Kepala Dusun</li>
+                                <li><i class="fas fa-users text-secondary me-2"></i>Rumah Ketua RW & RT</li>
+                                <li><i class="fas fa-seedling text-success me-2"></i>Area Persawahan</li>
+                                <li><i class="fas fa-tree text-success me-2"></i>Area Perkebunan</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="map-actions mt-3">
+                        <button class="btn btn-primary btn-map" data-bs-toggle="modal" data-bs-target="#mapModal2">
+                            <i class="fas fa-search-plus me-1"></i>Lihat Detail
+                        </button>
+                        <button class="btn btn-outline-success btn-map" onclick="downloadMap('administrasi')">
+                            <i class="fas fa-download me-1"></i>Unduh Peta
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <div class="text-warning mb-3">
+                                <i class="fas fa-shield-alt fa-3x"></i>
+                            </div>
+                            <h5 class="fw-bold">Mitigasi Bencana</h5>
+                            <p class="text-muted">
+                                Peta kerawanan longsor membantu warga memahami risiko
+                                dan melakukan tindakan pencegahan yang tepat.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <div class="text-primary mb-3">
+                                <i class="fas fa-map-marked-alt fa-3x"></i>
+                            </div>
+                            <h5 class="fw-bold">Navigasi Wilayah</h5>
+                            <p class="text-muted">
+                                Peta administrasi memudahkan identifikasi lokasi
+                                dan struktur organisasi wilayah dusun.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Modal 1 -->
+    <div class="modal fade" id="mapModal1" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Peta Rawan Bencana Longsor - Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="../images/PETA_LONGSOR.jpg"
+                        alt="Peta Rawan Bencana Longsor Detail" class="img-fluid">
+                    <p class="mt-3 text-muted">
+                        <small>Klik dan drag untuk melihat detail peta. Gunakan zoom browser untuk memperbesar.</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Modal 2 -->
+    <div class="modal fade" id="mapModal2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Peta Administrasi Dusun - Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="../images/peta_admin.jpg"
+                        alt="Peta Administrasi Dusun Detail" class="img-fluid">
+                    <p class="mt-3 text-muted">
+                        <small>Klik dan drag untuk melihat detail peta. Gunakan zoom browser untuk memperbesar.</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Back to top functionality
+        window.addEventListener('scroll', function () {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Download map function
+        function downloadMap(mapType) {
+            // Simulate download functionality
+            alert(`Fitur unduh peta ${mapType} akan segera tersedia. Silakan hubungi admin untuk mendapatkan file peta.`);
+        }
+
+        // Image zoom functionality in modals
+        document.querySelectorAll('.modal img').forEach(img => {
+            let isZoomed = false;
+            img.addEventListener('click', function () {
+                if (!isZoomed) {
+                    this.style.transform = 'scale(1.5)';
+                    this.style.cursor = 'zoom-out';
+                    isZoomed = true;
+                } else {
+                    this.style.transform = 'scale(1)';
+                    this.style.cursor = 'zoom-in';
+                    isZoomed = false;
+                }
+            });
+        });
+
+        // Reset zoom when modal is closed
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('hidden.bs.modal', function () {
+                const img = this.querySelector('img');
+                if (img) {
+                    img.style.transform = 'scale(1)';
+                    img.style.cursor = 'zoom-in';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

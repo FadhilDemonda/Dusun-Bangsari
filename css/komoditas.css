@@ -79,3 +79,9 @@
         font-size: 1.8rem;
     }
 }
+.commodity-item img {
+    height: 300px;
+    /* bisa disesuaikan misalnya 250px atau 350px */
+    object-fit: cover;
+    width: 100%;
+}
